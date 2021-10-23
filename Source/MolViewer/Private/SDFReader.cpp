@@ -7,6 +7,12 @@
 #include "String/ParseLines.h"
 #include "Engine/Public/DrawDebugHelpers.h"
 
+// Constants
+const int GTitleLine = 0;
+const int GProgramTimeStamp = 1;
+const int GCommentLine = 2;
+const int GCountsLine = 3;
+
 // Sets default values
 ASDFReader::ASDFReader()
 {
@@ -21,30 +27,30 @@ void ASDFReader::BeginPlay()
 	Super::BeginPlay();
 
 	FString file = FPaths::ProjectDir();
-	file.Append(TEXT("SDF/"));
+	file.Append(TEXT("Content/SDF/"));
 	file.Append(TEXT("Paracetamol.sdf"));
 
 	// We will use this FileManager to deal with the file.
 	IPlatformFile& FileManager = FPlatformFileManager::Get().GetPlatformFile();
 
-	// Always first check if the file that you want to manipulate exist.#
+	// Always first check if the file that you want to manipulate exist.
 	FString FileContent;
 	if (FileManager.FileExists(*file))
 	{
-	   // We use the LoadFileToString to load the file into
-	      if(FFileHelper::LoadFileToString(FileContent,*file,FFileHelper::EHashOptions::None))
-	      {
-	         //UE_LOG(LogTemp, Warning, TEXT("FileManipulation: Text From File: %s"), *FileContent);  
-	      }
-	      else
-	      {
-	         UE_LOG(LogTemp, Warning, TEXT("FileManipulation: Did not load text from file"));
-	      }
+		// We use the LoadFileToString to load the file into FileContent
+		if(FFileHelper::LoadFileToString(FileContent,*file,FFileHelper::EHashOptions::None))
+		{
+			UE_LOG(LogTemp, Warning, TEXT("FileManipulation: File loaded successfully"));  
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("FileManipulation: Did not load text from file"));
+		}
 	}
 	else
 	{
-	   UE_LOG(LogTemp, Warning, TEXT("FileManipulation: ERROR: Can not read the file because it was not found."));
-	   UE_LOG(LogTemp, Warning, TEXT("FileManipulation: Expected file location: %s"),*file);
+		UE_LOG(LogTemp, Warning, TEXT("FileManipulation: ERROR: Can not read the file because it was not found."));
+		UE_LOG(LogTemp, Warning, TEXT("FileManipulation: Expected file location: %s"),*file);
 	}
 
 	// Parse this string into an array
@@ -52,13 +58,12 @@ void ASDFReader::BeginPlay()
 	FileContent.ParseIntoArray(AllLines, TEXT("\n"));
 
 	// Grab our header lines
-	for(int i = 0; i < 3; i++)
-	{
-		HeaderLines.Add(AllLines[i]);
-	}
+	HeaderLines.Add(AllLines[GTitleLine]);
+	HeaderLines.Add(AllLines[GProgramTimeStamp]);
+	HeaderLines.Add(AllLines[GCommentLine]);
 
 	// Grab our count line
-	CountsLine = AllLines[3];
+	CountsLine = AllLines[GCountsLine];
 	int AtomCount = -1;
 	int BondCount = -1;
 	FString NumString;
