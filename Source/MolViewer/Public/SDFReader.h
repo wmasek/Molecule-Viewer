@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "SDFReader.generated.h"
-
+/*
 UENUM()
 enum ElementType
 {
@@ -33,7 +33,7 @@ struct FBond
 	FAtom* StartAtom;
 	FAtom* EndAtom;
 };
-
+*/
 UCLASS()
 class MOLVIEWER_API ASDFReader : public AActor
 {
@@ -50,7 +50,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+	/*
 private:
 	// Each string line of our SDF file
 	TArray<FString> HeaderLines;
@@ -61,5 +61,5 @@ private:
 	// Constructed Atoms and Bonds
 	TArray<FAtom> AtomList;
 	TArray<FBond> BondList;
-
+	*/
 };

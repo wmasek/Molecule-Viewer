@@ -8,10 +8,10 @@
 #include "Engine/Public/DrawDebugHelpers.h"
 
 // Constants
-const int GTitleLine = 0;
-const int GProgramTimeStamp = 1;
-const int GCommentLine = 2;
-const int GCountsLine = 3;
+//const int GTitleLine = 0;
+//const int GProgramTimeStamp = 1;
+//const int GCommentLine = 2;
+//const int GCountsLine = 3;
 
 // Sets default values
 ASDFReader::ASDFReader()
@@ -25,7 +25,8 @@ ASDFReader::ASDFReader()
 void ASDFReader::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
+	/*
 	FString file = FPaths::ProjectDir();
 	file.Append(TEXT("Content/SDF/"));
 	file.Append(TEXT("Paracetamol.sdf"));
@@ -199,13 +200,16 @@ void ASDFReader::BeginPlay()
 		// Add our newly created bond
 		BondList.Add(NewBond);
 	}
+	*/
 }
+
 
 // Called every frame
 void ASDFReader::Tick(float DeltaTime)
 {
-	Super::Tick(DeltaTime);
 
+	Super::Tick(DeltaTime);
+/*
 	for (auto Atom : AtomList)
 	{
 		switch(Atom.Element)
@@ -241,7 +245,7 @@ void ASDFReader::Tick(float DeltaTime)
 	{
 		DrawDebugLine(GetWorld(), (Bond.StartAtom->Position * 100.0f), (Bond.EndAtom->Position * 100.0f), FColor::White, false, -1, 0, 5.0f);
 	}
-
+	*/
 	
 }
 
