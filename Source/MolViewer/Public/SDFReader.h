@@ -7,7 +7,7 @@
 #include "SDFReader.generated.h"
 /*
 UENUM()
-enum ElementType
+enum EElementType
 {
 	OXYGEN,
 	NITROGEN,
@@ -22,7 +22,7 @@ struct FAtom
 	GENERATED_BODY()
 
 	FVector Position;
-	ElementType Element;
+	EElementType Element;
 };
 
 USTRUCT()
